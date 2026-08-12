@@ -1,76 +1,146 @@
-# Dashboard Financeiro - Vendas | Power BI
+# 📊 Dashboard Financeiro - Vendas | Power BI
 
-Projeto de Business Intelligence desenvolvido em **Power BI** para análise financeira, com foco em receitas, despesas, custos e resultado.
+Projeto de **Business Intelligence** desenvolvido em **Power BI** para análise e acompanhamento do desempenho financeiro, com foco em **receitas, custos, despesas e lucro**.
 
-## Objetivo
+O dashboard organiza os principais indicadores financeiros em uma experiência visual e interativa, permitindo acompanhar resultados, identificar variações ao longo do tempo e analisar informações de forma mais detalhada.
 
-Centralizar indicadores financeiros em um dashboard interativo, facilitando o acompanhamento da evolução dos resultados e o detalhamento das movimentações.
+---
 
-## Páginas do relatório
+## 🖥️ Visualização do Dashboard
 
-- **Capa** — página inicial e navegação do dashboard.
-- **Visão Geral** — visão consolidada dos principais indicadores.
-- **Detalhamento** — análise detalhada das movimentações e categorias.
+### 🏠 Capa
 
-## Principais indicadores
+Página inicial do projeto, com navegação para as áreas de **Visão Geral** e **Detalhamento**.
 
-- Receita
-- Despesas
-- Custos
-- Saídas
-- Lucro
+![Capa do Dashboard Financeiro](images/capa.jpeg)
 
-## Tecnologias e recursos
+### 📈 Visão Geral
 
-- Power BI Desktop
-- Power Query
-- DAX
-- Modelagem de dados
-- Power BI Project (`.pbip`)
-- TMDL (Tabular Model Definition Language)
-- Git / GitHub
+A página de Visão Geral apresenta os principais indicadores financeiros e permite acompanhar o desempenho do negócio de forma consolidada.
 
-## Estrutura do projeto
+Entre as análises disponíveis estão:
+
+* receita total;
+* custos;
+* despesas;
+* lucro;
+* evolução mensal da receita;
+* comparação entre receita e despesas;
+* custos e despesas ao longo do tempo;
+* distribuição das saídas;
+* receita por cliente;
+* filtro por ano.
+
+![Visão Geral do Dashboard Financeiro](images/visao-geral.jpeg)
+
+### 🔎 Detalhamento
+
+A página de Detalhamento permite analisar o resultado financeiro com maior profundidade, destacando a evolução do lucro ao longo dos meses e os valores mensais de receita, custos e despesas.
+
+![Detalhamento do Dashboard Financeiro](images/detalhamento.jpeg)
+
+---
+
+## 🎯 Objetivo do projeto
+
+O objetivo deste projeto é centralizar informações financeiras em um único painel e transformar dados em indicadores de fácil interpretação.
+
+Com o dashboard, é possível:
+
+* acompanhar receitas, custos, despesas e lucro;
+* analisar a evolução dos resultados ao longo dos meses;
+* identificar períodos de maior ou menor desempenho;
+* comparar entradas e saídas financeiras;
+* analisar a participação dos clientes na receita;
+* apoiar análises e tomadas de decisão com informações visuais.
+
+---
+
+## 📌 Principais indicadores
+
+O dashboard acompanha os seguintes KPIs:
+
+* **Receita**
+* **Custos**
+* **Despesas**
+* **Lucro**
+
+---
+
+## 🧠 Modelagem de dados
+
+O modelo semântico foi estruturado com tabelas de movimentações financeiras, plano de contas, calendário e medidas.
+
+| Tabela          | Finalidade                                            |
+| --------------- | ----------------------------------------------------- |
+| `Recebimentos1` | Informações relacionadas aos recebimentos             |
+| `Saidas`        | Movimentações financeiras de saída                    |
+| `Contas`        | Plano de contas e classificação das movimentações     |
+| `Data`          | Tabela calendário para análises temporais             |
+| `Medidas`       | Centralização dos indicadores utilizados no dashboard |
+
+---
+
+## 🛠️ Tecnologias e recursos utilizados
+
+* **Power BI Desktop**
+* **Power Query**
+* **DAX**
+* **Modelagem de dados**
+* **Power BI Project (`.pbip`)**
+* **TMDL**
+* **Git**
+* **GitHub**
+
+---
+
+## 📂 Estrutura do repositório
 
 ```text
 .
 ├── Dash Financeiro - Vendas.pbip
 ├── Dash Financeiro - Vendas.Report/
 ├── Dash Financeiro - Vendas.SemanticModel/
+├── images/
+│   ├── capa.jpeg
+│   ├── visao-geral.jpeg
+│   └── detalhamento.jpeg
 ├── .gitignore
 └── README.md
 ```
 
-O projeto está salvo no formato **PBIP**, permitindo versionar separadamente as definições do relatório e do modelo semântico.
+---
 
-## Fontes de dados
+## 📊 Fontes de dados
 
-As planilhas de origem **não estão incluídas neste repositório**. Os caminhos locais foram neutralizados para publicação e apontam para a estrutura genérica abaixo:
+O projeto utiliza arquivos Excel como fontes de dados, incluindo:
 
-```text
-C:\Dados\DashboardFinanceiro\BaseDados
-C:\Dados\DashboardFinanceiro\Planilhas Financeiro
-```
+* `Recebimentos.xlsx`
+* `Pagamentos.xlsx`
+* `CadastroPlanoContas.xlsx`
 
-Para atualizar os dados no Power BI, ajuste as origens no **Power Query** para o local onde as bases estiverem armazenadas no seu computador.
+> **Observação:** os arquivos de dados de origem não estão incluídos neste repositório.
 
-Arquivos de origem referenciados pelo projeto incluem:
-
-- `Pagamentos.xlsx`
-- `Recebimentos.xlsx`
-- `CadastroPlanoContas.xlsx`
-
-## Como abrir
-
-1. Clone ou baixe este repositório.
-2. Abra `Dash Financeiro - Vendas.pbip` no Power BI Desktop.
-3. Ajuste as fontes de dados no Power Query, caso deseje atualizar o modelo.
-4. Atualize os dados e salve o projeto.
-
-## Controle de versão
-
-Arquivos locais e de cache do Power BI, como `localSettings.json` e `cache.abf`, não são versionados.
+Para atualizar os dados em outro computador, será necessário configurar novamente as fontes no **Power Query**.
 
 ---
 
-Projeto desenvolvido para fins de estudo, portfólio e demonstração de habilidades em Business Intelligence.
+## 💡 Competências demonstradas
+
+* desenvolvimento de dashboards em Power BI;
+* tratamento e transformação de dados com Power Query;
+* criação de indicadores com DAX;
+* modelagem e relacionamento de dados;
+* análise de indicadores financeiros;
+* construção de análises temporais;
+* organização de projetos Power BI no formato PBIP;
+* versionamento com Git e GitHub.
+
+---
+
+## 👩‍💻 Autora
+
+**Tabata Frade**
+
+Projeto desenvolvido para fins de **estudo, portfólio e demonstração de habilidades em Business Intelligence e análise de dados**.
+::: 
