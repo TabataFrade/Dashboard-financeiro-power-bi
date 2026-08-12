@@ -1,0 +1,32 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup 'Transformar Arquivo de Planilhas Financeiro (2)'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Transformar Arquivo de Planilhas Financeiro (2)\Consultas Auxiliares'
+
+	annotation PBI_QueryGroupOrder = 0
+
+annotation PBI_QueryOrder = ["Parâmetro1","Transformar o Arquivo de Exemplo","Arquivo de Amostra","Transformar Arquivo","Contas","Recebimentos1","Saida2017","Saida2018","Saidas","Medidas"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_54eda91e-35b8-44c6-a803-8672df631d07
+ref table Contas
+ref table Recebimentos1
+ref table Saidas
+ref table Data
+ref table LocalDateTable_cbe6bce7-e10f-4016-a6a8-75042847b577
+ref table Medidas
+
+ref cultureInfo pt-BR
+

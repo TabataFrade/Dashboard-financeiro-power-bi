@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 409.58928571428555
+          },
+          "nodeIndex": "Contas",
+          "nodeLineageTag": "656ce2a4-a4ee-4af6-9eea-92453353c6f8",
+          "size": {
+            "height": 220,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 623.99999999999977,
+            "y": 509.017857142857
+          },
+          "nodeIndex": "Recebimentos1",
+          "nodeLineageTag": "ee178e1c-d43f-47a8-bf09-cc46c748842d",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 136.85714285714246,
+            "y": 61.660714285714135
+          },
+          "nodeIndex": "Saidas",
+          "nodeLineageTag": "e53c9129-ad48-49c1-95e1-e47e1426e544",
+          "size": {
+            "height": 172,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 588.28571428571411,
+            "y": 109.58928571428542
+          },
+          "nodeIndex": "Data",
+          "nodeLineageTag": "6fd1c83d-d242-47f3-b88a-b7d8c14b7087",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 909.71428571428544,
+            "y": 307.08928571428561
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "7a835cb8-4891-4c2c-8afe-08ea3a627215",
+          "size": {
+            "height": 276.85714285714283,
+            "width": 234
+          },
+          "zIndex": 5
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 70,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

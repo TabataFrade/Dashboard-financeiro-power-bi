@@ -1,0 +1,37 @@
+table Data
+	lineageTag: 6fd1c83d-d242-47f3-b88a-b7d8c14b7087
+
+	column Date
+		formatString: Short Date
+		lineageTag: a3ee00be-dfa2-4d73-9b2b-2b8ab79117da
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: a68d43e3-94cc-42cb-a800-53cc709ea6e1
+			defaultHierarchy: LocalDateTable_cbe6bce7-e10f-4016-a6a8-75042847b577.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Abreviado' = FORMAT(Data[Date], "MMM" )
+		lineageTag: c59f65c1-aeec-4ac4-b421-c753b1128059
+		summarizeBy: none
+		sortByColumn: 'Mês número'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês número' = MONTH(Data[Date])
+		formatString: 0
+		lineageTag: c41ed27a-7e97-4c17-b0ed-d0bee45819c3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Data = calculated
+		mode: import
+		source = CALENDARAUTO()
+
+	annotation PBI_Id = 86ff80fb48944d62a97639d3a41924e3
+

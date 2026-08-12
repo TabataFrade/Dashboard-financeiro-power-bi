@@ -1,0 +1,65 @@
+table Recebimentos1
+	lineageTag: ee178e1c-d43f-47a8-bf09-cc46c748842d
+
+	column data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d1bcb384-a515-4eef-8220-cec6518f488e
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column plano_contas_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e9b3e89-a214-44d4-bc4e-4e2740ddb1ab
+		summarizeBy: none
+		sourceColumn: plano_contas_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cliente
+		dataType: string
+		lineageTag: 3d630037-61c0-4cdd-a14c-1933fe08888a
+		summarizeBy: none
+		sourceColumn: cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf
+		dataType: string
+		lineageTag: 8dafc783-a903-420b-ac19-f29de54f0d53
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_recebido
+		dataType: double
+		lineageTag: 85fd9f67-9e8f-43a9-bd8a-1eb88feda694
+		summarizeBy: sum
+		sourceColumn: valor_recebido
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Recebimentos1 = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Dados\DashboardFinanceiro\BaseDados\Recebimentos.xlsx"), null, true),
+				    Sheet1_Sheet = Fonte{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"data", type date}, {"plano_contas_id", Int64.Type}, {"cliente", type text}, {"uf", type text}, {"valor_recebido", type number}, {"Column6", type any}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Column6"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

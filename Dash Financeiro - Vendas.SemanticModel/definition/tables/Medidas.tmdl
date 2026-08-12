@@ -1,0 +1,46 @@
+table Medidas
+	lineageTag: 7a835cb8-4891-4c2c-8afe-08ea3a627215
+
+	measure Receita = SUM('Recebimentos1'[valor_recebido])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 06fbfc6b-ea72-4cb1-af51-39afa371a1bb
+
+	measure Despesas = CALCULATE(SUM(Saidas[Valor]),'Contas'[lancamento] = "Despesa")
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 31463122-827f-47b3-a6c0-41b108aa13fe
+
+	measure Custos = CALCULATE(SUM(Saidas[Valor]),'Contas'[lancamento] = "Custo" )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: d3abe191-2377-42c8-a07e-6f2ef5d158b8
+
+	measure '% Lucro' = [Receita] -[Despesas] - [Custos]
+		lineageTag: 0c5f78e8-11f9-435c-b7e9-175268dbf33a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Saidas = [Custos] + [Despesas]
+		formatString: #,0
+		lineageTag: 2a573168-7951-4eee-8f26-0d6d5306385b
+
+	measure Receita2 = SUM('Recebimentos1'[valor_recebido])
+		formatString: #,0
+		lineageTag: 1f41bcf5-7045-4ce7-972b-c12fd4e94fae
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Lucro = [Receita] -[Despesas] - [Custos]
+		formatString: 0%;-0%;0%
+		lineageTag: 6a461e61-4563-4206-8d01-d4aad313b3cf
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

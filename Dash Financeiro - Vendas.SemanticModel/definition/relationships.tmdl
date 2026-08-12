@@ -1,0 +1,28 @@
+relationship a68d43e3-94cc-42cb-a800-53cc709ea6e1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Data.Date
+	toColumn: LocalDateTable_cbe6bce7-e10f-4016-a6a8-75042847b577.Date
+
+relationship b790faa3-7ced-ec71-1f0a-27b67a1c1db8
+	fromColumn: Saidas.Data
+	toColumn: Data.Date
+
+relationship a20ff97f-2cf4-9002-35ac-9ce22222be5f
+	fromColumn: Recebimentos1.data
+	toColumn: Data.Date
+
+relationship 0a314e9c-7505-0d83-2116-1404f2ff35c2
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: Recebimentos1.plano_contas_id
+	toColumn: Saidas.'ID Conta'
+
+relationship c574c9a5-b432-26cf-3e55-40e6face4bb8
+	fromColumn: Saidas.'ID Conta'
+	toColumn: Contas.id
+
+relationship 100fc62c-3df3-e78d-6859-55e0526709a6
+	isActive: false
+	fromColumn: Recebimentos1.plano_contas_id
+	toColumn: Contas.id
+

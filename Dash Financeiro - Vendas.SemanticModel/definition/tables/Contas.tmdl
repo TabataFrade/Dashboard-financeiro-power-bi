@@ -1,0 +1,57 @@
+table Contas
+	lineageTag: 656ce2a4-a4ee-4af6-9eea-92453353c6f8
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: b614ca60-9dac-4b69-bc77-2659bde06086
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column movimento
+		dataType: string
+		lineageTag: a35e6648-4985-43de-bd90-57e75666590f
+		summarizeBy: none
+		sourceColumn: movimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column lancamento
+		dataType: string
+		lineageTag: 69676566-2502-4239-ac1e-9f217631f620
+		summarizeBy: none
+		sourceColumn: lancamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column conta
+		dataType: string
+		lineageTag: 8773b2b8-ba3c-4191-aaa1-aeeb30c5f944
+		summarizeBy: none
+		sourceColumn: conta
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo
+		dataType: string
+		lineageTag: 9181886b-07f9-409f-8fb3-7fc4220afde3
+		summarizeBy: none
+		sourceColumn: tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Contas = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Dados\DashboardFinanceiro\BaseDados\CadastroPlanoContas.xlsx"), null, true),
+				    Contas_Sheet = Fonte{[Item="Contas",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Contas_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"id", Int64.Type}, {"movimento", type text}, {"lancamento", type text}, {"conta", type text}, {"tipo", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

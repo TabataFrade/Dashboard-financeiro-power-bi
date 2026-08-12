@@ -1,0 +1,86 @@
+expression Parâmetro1 = #"Arquivo de Amostra" meta [IsParameterQuery=true, BinaryIdentifier=#"Arquivo de Amostra", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: b762dc5a-4c2c-4c9d-bb47-86e3eeacbfc9
+	queryGroup: 'Transformar Arquivo de Planilhas Financeiro (2)\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transformar o Arquivo de Exemplo' =
+		let
+		    Fonte = Excel.Workbook(Parâmetro1, null, true),
+		    Planilha1_Sheet = Fonte{[Item="Planilha1",Kind="Sheet"]}[Data],
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: 348a31ae-a9f8-47aa-94fa-d97db9dd71f3
+	queryGroup: 'Transformar Arquivo de Planilhas Financeiro (2)'
+
+	annotation PBI_ResultType = Table
+
+expression 'Arquivo de Amostra' =
+		let
+		    Fonte = Folder.Files("C:\Dados\DashboardFinanceiro\Planilhas Financeiro"),
+		    Navegação1 = Fonte{0}[Content]
+		in
+		    Navegação1
+	lineageTag: 2ddff4d6-e811-447e-85b2-3c95280ada16
+	queryGroup: 'Transformar Arquivo de Planilhas Financeiro (2)\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transformar Arquivo' =
+		let
+		    Fonte = (Parâmetro1 as binary) => let
+		    Fonte = Excel.Workbook(Parâmetro1, null, true),
+		    Planilha1_Sheet = Fonte{[Item="Planilha1",Kind="Sheet"]}[Data],
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+		in
+		    Fonte
+	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""Transformar o Arquivo de Exemplo""}" ]
+	lineageTag: 28ec9dd1-0252-4acf-9a7a-927c8abed9e6
+	queryGroup: 'Transformar Arquivo de Planilhas Financeiro (2)\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Function
+
+expression Saida2018 =
+		let
+		    Fonte = Excel.Workbook(File.Contents("C:\Dados\DashboardFinanceiro\BaseDados\Pagamentos.xlsx"), null, true),
+		    Saida2017_Sheet = Fonte{[Item="Saida2018",Kind="Sheet"]}[Data],
+		    #"Tipo Alterado" = Table.TransformColumnTypes(Saida2017_Sheet,{{"Column1", type any}, {"Column2", type any}, {"Column3", type any}, {"Column4", type any}, {"Column5", type any}, {"Column6", type any}, {"Column7", type any}, {"Column8", type any}, {"Column9", type any}, {"Column10", type any}, {"Column11", type any}, {"Column12", type any}, {"Column13", type any}, {"Column14", type any}, {"Column15", type any}}),
+		    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Column1"}),
+		    #"Linhas Superiores Removidas" = Table.Skip(#"Colunas Removidas",7),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Linhas Superiores Removidas", [PromoteAllScalars=true]),
+		    #"Colunas Removidas1" = Table.RemoveColumns(#"Cabeçalhos Promovidos",{"Total"}),
+		    #"Colunas Não Dinâmicas" = Table.UnpivotOtherColumns(#"Colunas Removidas1", {"ID Conta"}, "Atributo", "Valor"),
+		    #"Colunas Renomeadas" = Table.RenameColumns(#"Colunas Não Dinâmicas",{{"Atributo", "Data"}}),
+		    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"Data", type date}, {"Valor", Int64.Type}})
+		in
+		    #"Tipo Alterado2"
+	lineageTag: 90cbb977-7471-4e6d-ae4c-8dfd586a6b38
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
+expression Saida2017 =
+		let
+		    Fonte = Excel.Workbook(File.Contents("C:\Dados\DashboardFinanceiro\BaseDados\Pagamentos.xlsx"), null, true),
+		    Saida2017_Sheet = Fonte{[Item="Saida2017",Kind="Sheet"]}[Data],
+		    #"Tipo Alterado" = Table.TransformColumnTypes(Saida2017_Sheet,{{"Column1", type any}, {"Column2", type any}, {"Column3", type any}, {"Column4", type any}, {"Column5", type any}, {"Column6", type any}, {"Column7", type any}, {"Column8", type any}, {"Column9", type any}, {"Column10", type any}, {"Column11", type any}, {"Column12", type any}, {"Column13", type any}, {"Column14", type any}, {"Column15", type any}}),
+		    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Column1"}),
+		    #"Linhas Superiores Removidas" = Table.Skip(#"Colunas Removidas",7),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Linhas Superiores Removidas", [PromoteAllScalars=true]),
+		    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"ID Conta", Int64.Type}, {"jan/17", type number}, {"fev/17", type number}, {"mar/17", type number}, {"abr/17", type number}, {"mai/17", type number}, {"jun/17", type number}, {"jul/17", type number}, {"ago/17", type number}, {"set/17", type number}, {"out/17", type number}, {"nov/17", type number}, {"dez/17", type number}, {"Total", type number}}),
+		    #"Colunas Removidas1" = Table.RemoveColumns(#"Tipo Alterado1",{"Total"}),
+		    #"Colunas Não Dinâmicas" = Table.UnpivotOtherColumns(#"Colunas Removidas1", {"ID Conta"}, "Atributo", "Valor"),
+		    #"Colunas Renomeadas" = Table.RenameColumns(#"Colunas Não Dinâmicas",{{"Atributo", "Data"}}),
+		    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"Data", type date}, {"Valor", Int64.Type}})
+		in
+		    #"Tipo Alterado2"
+	lineageTag: 1d3e83ac-a2a0-4236-b730-b69154a15d19
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
